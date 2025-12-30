@@ -1,10 +1,169 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Test Page</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy New Year 2026 🎉</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+body{
+  margin:0;
+  background:#000;
+  color:#FFD700;
+  font-family:Arial, sans-serif;
+  text-align:center;
+  padding-bottom:90px;
+}
+h1{
+  margin-top:20px;
+  font-size:2.5rem;
+  text-shadow:0 0 15px gold;
+}
+.subtitle{color:#fff;font-size:14px;margin-bottom:20px;}
+
+.card{
+  background:#111;
+  margin:15px;
+  padding:20px;
+  border-radius:15px;
+  border:1px solid #333;
+}
+input,select{
+  width:100%;
+  padding:12px;
+  margin:10px 0;
+  border-radius:8px;
+  border:1px solid #444;
+  background:#000;
+  color:#fff;
+}
+button{
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:10px;
+  background:linear-gradient(45deg,gold,#ffb700);
+  color:#000;
+  font-weight:bold;
+  font-size:18px;
+  cursor:pointer;
+}
+canvas{
+  width:100%;
+  margin-top:20px;
+  display:none;
+  border:2px solid gold;
+  border-radius:10px;
+}
+.share-bar{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  background:#111;
+  border-top:1px solid gold;
+  display:none;
+  justify-content:space-around;
+  padding:12px 0;
+}
+.share-bar button{
+  background:none;
+  color:#fff;
+  font-size:12px;
+}
+.share-bar i{font-size:22px;}
+</style>
 </head>
+
 <body>
-  <h1>🎉 Hello! Site Live Ho Gayi 🎉</h1>
-  <p>GitHub Pages working perfectly.</p>
+
+<h1>✨ Happy New Year 2026 ✨</h1>
+<p class="subtitle">Create your viral New Year photo wish</p>
+
+<div class="card">
+<select id="wish">
+  <option>Happy New Year 2026!</option>
+  <option>May 2026 bring success & happiness</option>
+  <option>Happy New Year to my family ❤️</option>
+</select>
+
+<input type="text" id="name" placeholder="Your Name">
+<input type="file" id="photo" accept="image/*">
+
+<button onclick="makeCard()">✨ Create Magic Card ✨</button>
+</div>
+
+<canvas id="canvas" width="600" height="750"></canvas>
+
+<div class="share-bar" id="share">
+<button onclick="downloadImg()"><i class="fas fa-download"></i><br>Save</button>
+<button onclick="shareWA()"><i class="fab fa-whatsapp" style="color:#25D366"></i><br>WhatsApp</button>
+<button onclick="moreShare()"><i class="fas fa-share-alt"></i><br>More</button>
+</div>
+
+<script>
+function makeCard(){
+  const c=document.getElementById("canvas");
+  const ctx=c.getContext("2d");
+  const name=document.getElementById("name").value||"Friend";
+  const wish=document.getElementById("wish").value;
+  const file=document.getElementById("photo").files[0];
+  if(!file){alert("Photo select karo");return;}
+
+  const img=new Image();
+  img.onload=function(){
+    ctx.fillStyle="#000";
+    ctx.fillRect(0,0,600,750);
+    let s=Math.max(600/img.width,500/img.height);
+    let x=(600-img.width*s)/2;
+    let y=(500-img.height*s)/2;
+    ctx.drawImage(img,x,y,img.width*s,img.height*s);
+
+    ctx.fillStyle="rgba(0,0,0,.6)";
+    ctx.fillRect(0,480,600,270);
+
+    ctx.fillStyle="gold";
+    ctx.font="bold 50px serif";
+    ctx.textAlign="center";
+    ctx.fillText("Happy New Year",300,550);
+    ctx.font="bold 80px serif";
+    ctx.fillText("2026",300,630);
+
+    ctx.font="22px sans-serif";
+    ctx.fillStyle="#fff";
+    ctx.fillText(wish,300,680);
+
+    ctx.fillStyle="gold";
+    ctx.font="bold 28px sans-serif";
+    ctx.fillText("- "+name,300,720);
+
+    c.style.display="block";
+    document.getElementById("share").style.display="flex";
+    window.scrollTo(0,document.body.scrollHeight);
+  }
+  img.src=URL.createObjectURL(file);
+}
+
+function downloadImg(){
+  const a=document.createElement("a");
+  a.download="NewYear2026.png";
+  a.href=canvas.toDataURL();
+  a.click();
+}
+function shareWA(){
+  const t="✨ Maine apna New Year 2026 wish banaya 🎉 Tum bhi banao 👇\n"+location.href;
+  window.open("https://wa.me/?text="+encodeURIComponent(t));
+}
+function moreShare(){
+  alert("Image download karke share karo 😊");
+  downloadImg();
+}
+</script>
+
+<!-- ADS CODE YAHAN PASTE KARNA -->
+<!-- <script src="ADS_CODE.js"></script> -->
+
 </body>
 </html>
