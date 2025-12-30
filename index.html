@@ -14,15 +14,18 @@ body{
   color:#FFD700;
   font-family:Arial, sans-serif;
   text-align:center;
-  padding-bottom:90px;
+  padding-bottom:100px;
 }
 h1{
   margin-top:20px;
   font-size:2.5rem;
   text-shadow:0 0 15px gold;
 }
-.subtitle{color:#fff;font-size:14px;margin-bottom:20px;}
-
+.subtitle{
+  color:#fff;
+  font-size:14px;
+  margin-bottom:20px;
+}
 .card{
   background:#111;
   margin:15px;
@@ -56,9 +59,13 @@ canvas{
   display:none;
   border:2px solid gold;
   border-radius:10px;
-}<p style="font-size:12px;color:#ffcc00;">
-📸 Image Save ho chuki hai | Instagram & Facebook par upload/share karo
-</p>
+}
+.info-text{
+  font-size:12px;
+  color:#ffcc00;
+  margin-top:10px;
+  display:none;
+}
 .share-bar{
   position:fixed;
   bottom:0;
@@ -69,13 +76,16 @@ canvas{
   display:none;
   justify-content:space-around;
   padding:12px 0;
+  z-index:999;
 }
 .share-bar button{
   background:none;
   color:#fff;
   font-size:12px;
 }
-.share-bar i{font-size:22px;}
+.share-bar i{
+  font-size:22px;
+}
 </style>
 </head>
 
@@ -85,24 +95,34 @@ canvas{
 <p class="subtitle">Create your viral New Year photo wish</p>
 
 <div class="card">
-<select id="wish">
-  <option>Happy New Year 2026!</option>
-  <option>May 2026 bring success & happiness</option>
-  <option>Happy New Year to my family ❤️</option>
-</select>
+  <select id="wish">
+    <option>Happy New Year 2026!</option>
+    <option>May 2026 bring success & happiness</option>
+    <option>Happy New Year to my family ❤️</option>
+  </select>
 
-<input type="text" id="name" placeholder="Your Name">
-<input type="file" id="photo" accept="image/*">
+  <input type="text" id="name" placeholder="Your Name">
+  <input type="file" id="photo" accept="image/*">
 
-<button onclick="makeCard()">✨ Create Magic Card ✨</button>
+  <button onclick="makeCard()">✨ Create Magic Card ✨</button>
 </div>
 
 <canvas id="canvas" width="600" height="750"></canvas>
 
+<p class="info-text" id="info">
+📸 Image Save ho chuki hai | Instagram & Facebook par upload/share karo
+</p>
+
 <div class="share-bar" id="share">
-<button onclick="downloadImg()"><i class="fas fa-download"></i><br>Save</button>
-<button onclick="shareWA()"><i class="fab fa-whatsapp" style="color:#25D366"></i><br>WhatsApp</button>
-<button onclick="moreShare()"><i class="fas fa-share-alt"></i><br>More</button>
+  <button onclick="downloadImg()">
+    <i class="fas fa-download"></i><br>Save
+  </button>
+  <button onclick="shareWA()">
+    <i class="fab fa-whatsapp" style="color:#25D366"></i><br>WhatsApp
+  </button>
+  <button onclick="moreShare()">
+    <i class="fas fa-share-alt"></i><br>More
+  </button>
 </div>
 
 <script>
@@ -118,6 +138,7 @@ function makeCard(){
   img.onload=function(){
     ctx.fillStyle="#000";
     ctx.fillRect(0,0,600,750);
+
     let s=Math.max(600/img.width,500/img.height);
     let x=(600-img.width*s)/2;
     let y=(500-img.height*s)/2;
@@ -130,6 +151,7 @@ function makeCard(){
     ctx.font="bold 50px serif";
     ctx.textAlign="center";
     ctx.fillText("Happy New Year",300,550);
+
     ctx.font="bold 80px serif";
     ctx.fillText("2026",300,630);
 
@@ -143,6 +165,7 @@ function makeCard(){
 
     c.style.display="block";
     document.getElementById("share").style.display="flex";
+    document.getElementById("info").style.display="block";
     window.scrollTo(0,document.body.scrollHeight);
   }
   img.src=URL.createObjectURL(file);
@@ -154,18 +177,20 @@ function downloadImg(){
   a.href=canvas.toDataURL();
   a.click();
 }
+
 function shareWA(){
-  const t="✨ Maine apna New Year 2026 wish banaya 🎉 Tum bhi banao 👇\n"+location.href;
+  const t="✨ Maine apna New Year 2026 wish banaya 🎉\nTum bhi banao 👇\n"+location.href;
   window.open("https://wa.me/?text="+encodeURIComponent(t));
 }
+
 function moreShare(){
-  alert("Image download karke share karo 😊");
+  alert("Image download ho chuki hai 😊\nAb Facebook / Instagram par upload karo");
   downloadImg();
 }
 </script>
 
-<!-- ADS CODE YAHAN PASTE KARNA -->
-<!-- <script src="ADS_CODE.js"></script> -->
+<!-- ✅ ADSTERRA POPUNDER (PERFECT POSITION) -->
+<script src="https://pl28367833.effectivegatecpm.com/f6/32/01/f632016b8b350e0db5ad18a77ebf7764.js"></script>
 
 </body>
 </html>
